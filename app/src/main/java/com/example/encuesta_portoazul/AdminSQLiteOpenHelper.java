@@ -61,6 +61,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
 
     public boolean addCuestionario(Cuestionario cuestionario){
+        long respuesta;
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_paciente", cuestionario.getId_paciente());
@@ -71,15 +72,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("pregunta5", cuestionario.getPregunta5());
         contentValues.put("promedio", cuestionario.getPromedio());
 
-        try {
-            db.insert("cuestionario", null, contentValues);
-            db.close();
-            return  true;
-        }catch (Exception e){
-            db.close();
-            Log.d(String.valueOf(e), "Error al insertar en la tabla Cuestionario");
-            return false;
+        respuesta = db.insert("cuestionario", null, contentValues);
+        db.close();
+        if (respuesta!=-1){
+            return true;
         }
+        return false;
 
     }
 

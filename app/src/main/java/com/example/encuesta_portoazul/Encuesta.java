@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class Encuesta extends AppCompatActivity {
 
     //campos de layout
-    EditText nombre, apellido, telefono, direccion, profesion, cargo;
+    EditText nombre, apellido, telefono, direccion, profesion, cargo, id;
     Spinner estado_civil, estrato, niveleducativo;
     RadioGroup pregunta1, pregunta2, pregunta3, pregunta4, pregunta5;
     RadioButton respuesta1, respuesta2, respuesta3, respuesta4, respuesta5;
@@ -38,6 +38,7 @@ public class Encuesta extends AppCompatActivity {
         setContentView(R.layout.activity_encuesta);
         bguardar = findViewById(R.id.guardar);
 
+        id = findViewById(R.id.et_id_paciente);
         nombre = findViewById(R.id.et_nom_paciente);
         apellido = findViewById(R.id.et_apell_paciente);
         telefono = findViewById(R.id.et_tel_paciente);
@@ -90,39 +91,48 @@ public class Encuesta extends AppCompatActivity {
 
                     alerta("Ups! Todos los campos son obligatorios.");
                 }else{
+
+
                     respuesta1 = findViewById(pregunta1.getCheckedRadioButtonId());
                     respuesta2 = findViewById(pregunta2.getCheckedRadioButtonId());
                     respuesta3 = findViewById(pregunta3.getCheckedRadioButtonId());
                     respuesta4 = findViewById(pregunta4.getCheckedRadioButtonId());
                     respuesta5 = findViewById(pregunta5.getCheckedRadioButtonId());
 
-                    /*
-                    evaluaciones.setNombre(String.valueOf(tvnombre.getText()));
-                    evaluaciones.setPregunta1(Integer.parseInt(
-                            String.valueOf(respuesta1.getText())));
-                    evaluaciones.setPregunta2(Integer.parseInt(
-                            String.valueOf(respuesta2.getText())));
-                    evaluaciones.setPregunta3(Integer.parseInt(
-                            String.valueOf(respuesta3.getText())));
-                    evaluaciones.setPregunta4(Integer.parseInt(
-                            String.valueOf(respuesta4.getText())));
-                    evaluaciones.setPregunta5(Integer.parseInt(
-                            String.valueOf(respuesta5.getText())));
-                    evaluaciones.setPregunta6(Integer.parseInt(
-                            String.valueOf(respuesta6.getText())));
-                    evaluaciones.setPregunta7(Integer.parseInt(
-                            String.valueOf(respuesta7.getText())));
-                    evaluaciones.setPregunta8(Integer.parseInt(
-                            String.valueOf(respuesta8.getText())));
-                    evaluaciones.setPregunta9(Integer.parseInt(
-                            String.valueOf(respuesta9.getText())));
-                    evaluaciones.setPregunta10(Integer.parseInt(
-                            String.valueOf(respuesta10.getText())));
-                    evaluaciones.setPregunta11(Integer.parseInt(
-                            String.valueOf(respuesta11.getText())));
-                    evaluaciones.setPregunta12(Integer.parseInt(
-                            String.valueOf(respuesta12.getText())));
+                    paciente = new Paciente();
+                    paciente.setId(convertirEditTextString(id));
+                    paciente.setNombre(convertirEditTextString(nombre));
+                    paciente.setApellido(convertirEditTextString(apellido));
+                    paciente.setTelefono(convertirEditTextString(telefono));
+                    paciente.setDireccion(convertirEditTextString(direccion));
+                    paciente.setCargo(convertirEditTextString(cargo));
+                    paciente.setProfesion(convertirEditTextString(profesion));
+                    paciente.setEstado_civil(estado_civil.getSelectedItem().toString());
+                    paciente.setEstrato(estrato.getSelectedItem().toString());
+                    paciente.setNivel_estudio(niveleducativo.getSelectedItem().toString());
 
+                    db = new AdminSQLiteOpenHelper(Encuesta.this);
+                    boolean p = db.addPaciente(paciente);
+                    if (p){
+                        //alerta("Se ha creado exitosamente el paciente");
+                        cuestionario = new Cuestionario();
+                        cuestionario.setId_paciente(paciente.getId());
+                        cuestionario.setPregunta1(convertirRadioButtonToInt(respuesta1));
+                        cuestionario.setPregunta2(convertirRadioButtonToInt(respuesta2));
+                        cuestionario.setPregunta3(convertirRadioButtonToInt(respuesta3));
+                        cuestionario.setPregunta4(String.valueOf(respuesta4.getText()));
+                        cuestionario.setPregunta5(convertirRadioButtonToInt(respuesta5));
+
+                        boolean c = db.addCuestionario(cuestionario);
+                        if (c){
+                            alerta("Cuestionario guardo exitosamente");
+                        }else{
+                            alerta("Error al guar cuestionario");
+                        }
+                    }else {
+                        alerta("Error al crear el paciente, ya existe");
+                    }
+                    /*
                     imprimir( "Resultado de la  " + evaluaciones.getPregunta1());
                     imprimir( "Resultado de la operacion " + evaluaciones.resultado());
                     if (archivo.escribirTxt(  getApplicationContext()  , evaluaciones.toString())){
@@ -142,6 +152,7 @@ public class Encuesta extends AppCompatActivity {
                     startActivity(i);
                     finish();
                     */
+
 
 
                 }
@@ -191,5 +202,13 @@ public class Encuesta extends AppCompatActivity {
     private void alerta(String mensaje){
         Toast.makeText(getApplicationContext(),
                 mensaje , Toast.LENGTH_SHORT).show();
+    }
+
+    private String convertirEditTextString(EditText campo){
+        return String.valueOf(campo.getText());
+    }
+
+    private int convertirRadioButtonToInt(RadioButton radioButton){
+        return Integer.parseInt(String.valueOf(radioButton.getText()));
     }
 }
