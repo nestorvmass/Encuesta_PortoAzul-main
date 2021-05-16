@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Encuesta_PortoAzul</string>
+    <string name="pregunta1">1. Basándose en su experiencia completa con nuestro centro de atención médica.¿qué probabilidad existe que nos recomiende con un amigo o colega? Donde 1 es totalmente insatisfecho y 5 Muy satisfecho.</string>
+    <string name="pregunta2">2. ¿Tuvo algún problema para concertar una cita? Donde 1 es totalmente insatisfecho y 5 Muy satisfecho.</string>
+    <string name="pregunta3">3. ¿Cómo calificaría el profesionalismo de nuestro personal? Donde 1 es totalmente insatisfecho y 5 Muy satisfecho.</string>
+    <string name="pregunta4">4. ¿Cuenta actualmente con la cobertura de un plan de seguro médico? Respuesta (1 si o 2 no)</string>
+    <string name="pregunta5">5. ¿Cómo calificaría el proceso de diagnóstico de la intervención a la que se sometió? Donde 1 es totalmente insatisfecho y 5 Muy satisfecho.</string>
+    <string name="title_activity_resultados_encuesta">resultados_encuesta</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    
+    
+    <string-array name="estado_civil">
+        <item>Seleccionar</item>
+        <item>Soltero</item>
+        <item>Casado</item>
+    </string-array>
+
+    <string-array name="estrato">
+        <item>Seleccionar</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>5</item>
+        <item>6</item>
+
+    </string-array>
+
+    <string-array name="nivel_estudio">
+        <item>Seleccionar</item>
+        <item>Técnico Profesional</item>
+        <item>Tecnológico</item>
+        <item>Profesional</item>
+        <item>Maestría</item>
+        <item>Doctorado</item>
+
+    </string-array>
+</resources>
