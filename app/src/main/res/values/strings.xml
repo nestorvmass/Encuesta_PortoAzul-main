@@ -6,13 +6,15 @@
     <string name="pregunta4">4. ¿Cuenta actualmente con la cobertura de un plan de seguro médico? Respuesta (1 si o 2 no)</string>
     <string name="pregunta5">5. ¿Cómo calificaría el proceso de diagnóstico de la intervención a la que se sometió? Donde 1 es totalmente insatisfecho y 5 Muy satisfecho.</string>
     <string name="title_activity_resultados_encuesta">resultados_encuesta</string>
+    <string name="MiInfo">Soy estudiante de 6to semestre de ingeniería de sistemas, apasionado por la tecnologías de la información. Cuento con conocimientos en GNU/Linux, Docker, Windows server, java, web scraping con Python, conocimientos básicos de php, sql."</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    
-    
+    <string name="actividad">Esta App en android nativo, está diseñada para recolectar por medio de un cuestionario la satisfacción de los paciente de la clínica porto azul.</string>
+
+
     <string-array name="estado_civil">
         <item>Seleccionar</item>
         <item>Soltero</item>

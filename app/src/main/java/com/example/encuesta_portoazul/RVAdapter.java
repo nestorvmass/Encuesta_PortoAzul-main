@@ -32,6 +32,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         personViewHolder.personN.setText(persons.get(i).nombre);
         personViewHolder.personV.setText(persons.get(i).valoracion);
         personViewHolder.personC.setText(persons.get(i).cobertura);
+        personViewHolder.personID.setText(persons.get(i).id);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         CardView cv;
         TextView personN;
         TextView personV;
+        TextView personID;
         TextView personC;
 
         PersonViewHolder(View itemView) {
@@ -51,6 +53,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
             personN = itemView.findViewById(R.id.tvnombre_paciente);
             personV = itemView.findViewById(R.id.tv_valoracion);
             personC = itemView.findViewById(R.id.tv_cobertura);
+            personID = itemView.findViewById(R.id.tv_id);
         }
     }
 }

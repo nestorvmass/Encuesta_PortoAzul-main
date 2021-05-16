@@ -3,12 +3,14 @@ package com.example.encuesta_portoazul;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,9 +69,10 @@ public class PrincipalActivity extends AppCompatActivity {
 
         menu = findViewById(R.id.listamenu);
         opciones = new ArrayList<String>();
-        opciones.add("Calcular Estres");
-        opciones.add("Informacion sobre el Estres");
-        opciones.add("Uso de la aplicacion");
+        opciones.add("Cuestionario de satisfacción");
+        opciones.add("Resultado de cuestionario pacientes");
+        opciones.add("Sobre esta app");
+        opciones.add("Medidor de Estres Laboral");
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, opciones );
         menu.setAdapter(adaptador);
         menu.setOnItemClickListener((parent, view, position, id) -> {
@@ -92,10 +95,16 @@ public class PrincipalActivity extends AppCompatActivity {
                 startActivity(i);
             }
             if(position==2){
-                Intent i = new Intent();
+                Intent i = new Intent(this, InfoDevsActivity.class);
                 Bundle bundle = new Bundle();
                 i.putExtras(bundle);
                 startActivity(i);
+            }
+            if(position==3){
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(new ComponentName("com.example.medidordeestreslaboral","com.example.medidordeestreslaboral.MainActivity"));
+                startActivity(intent);
+
             }
 
             /*
@@ -147,7 +156,13 @@ public class PrincipalActivity extends AppCompatActivity {
                     }
                 });
         AlertDialog titulo = alerta.create();
-        titulo.setTitle("Ejemplo");
+        titulo.setTitle("Anexo 1");
         titulo.show();
+    }
+
+
+    private void alerta(String mensaje){
+        Toast.makeText(getApplicationContext(),
+                mensaje , Toast.LENGTH_SHORT).show();
     }
 }

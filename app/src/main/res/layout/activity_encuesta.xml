@@ -7,6 +7,20 @@
     android:orientation="vertical"
     tools:context=".EncuestaActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="Encuesta de satisfaccion"></TextView>
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,20 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:text="Encuesta de satisfaccion"></TextView>
 
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,7 +100,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="identificacion">
+                    android:hint="Identificacion"
+                    android:inputType="number">
                 </EditText>
 
             </LinearLayout>
@@ -628,17 +630,15 @@
                     android:gravity="center">
 
                     <Button
-
                         android:id="@+id/guardar"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="40dp"
                         android:onClick="@"
-                        android:text="Enviar Cuestionario"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/RG5">
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/black"
+                        app:cornerRadius="8dp"
+                        android:text="Enviar Cuestionario">
 
                         >
 

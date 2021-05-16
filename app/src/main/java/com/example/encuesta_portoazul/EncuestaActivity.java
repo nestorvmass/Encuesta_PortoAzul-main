@@ -125,8 +125,10 @@ public class EncuestaActivity extends AppCompatActivity {
                         boolean c = db.addCuestionario(cuestionario);
                         if (c){
                             alerta("Cuestionario guardo exitosamente");
+                            finish();
                         }else{
                             alerta("Error al guar cuestionario");
+
                         }
                     }else {
                         alerta("Error al crear el paciente, ya existe");
@@ -194,7 +196,7 @@ public class EncuestaActivity extends AppCompatActivity {
                     }
                 });
         AlertDialog titulo = alerta.create();
-        titulo.setTitle("Ejemplo");
+        titulo.setTitle("Anexo 1");
         titulo.show();
     }
 
