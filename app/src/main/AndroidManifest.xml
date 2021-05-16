@@ -23,7 +23,7 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity android:name=".Encuesta" />
+        <activity android:name=".EncuestaActivity" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

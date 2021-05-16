@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "sqli_portoazul";
     private static final int  DB_VERSION = 1;
@@ -103,4 +106,39 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         return resultado;
     }
+
+    public List<Person> listapersonas(){
+        Person persona;
+        List<Person> persons;
+        persons = new ArrayList<>();
+        //ArrayList<Person> listapersonas =  new ArrayList<Person>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "select id, nombre, apellido from paciente";
+
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()){
+            persona = new Person();
+            persona.setId(cursor.getString(0));
+            persona.setNombre(cursor.getString(1) + " "+ cursor.getString(2));
+            String query1 = "select pregunta4, promedio from cuestionario where id_paciente="+"'"+persona.getId()+"'";
+            Cursor f = db.rawQuery(query1, null);
+            if(f.moveToFirst()) {
+                persona.setCobertura(f.getString(0));
+                persona.setValoracion(f.getString(1));
+
+            }
+
+            System.out.println("PERSONA HELPER"+ persona.getId());
+            System.out.println("PERSONA HELPER"+ persona.getNombre());
+            System.out.println("PERSONA HELPER"+ persona.getCobertura());
+            System.out.println("PERSONA HELPER"+ persona.getValoracion());
+            System.out.println("PERSONA HELPER");
+            persons.add(persona);
+        }
+
+        return persons;
+    }
+
+
 }

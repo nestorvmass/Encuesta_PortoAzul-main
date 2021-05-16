@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -76,7 +75,7 @@ public class PrincipalActivity extends AppCompatActivity {
         menu.setOnItemClickListener((parent, view, position, id) -> {
 
             if(position==0){
-                Intent i = new Intent(this, Encuesta.class);
+                Intent i = new Intent(this, EncuestaActivity.class);
                 System.out.println("respu, antes de enviar al encuesta: "+estado);
                 if(estado =="Acepto"){
                     i.putExtra("PrincipalToEncuesta", "Acepto");
@@ -135,7 +134,7 @@ public class PrincipalActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //finish();
-                        Intent intent = new Intent(PrincipalActivity.this, Encuesta.class);
+                        Intent intent = new Intent(PrincipalActivity.this, EncuestaActivity.class);
                         intent.putExtra("PrincipalToEncuesta", "Acepto");
                         startActivity(intent);
                         //finish();

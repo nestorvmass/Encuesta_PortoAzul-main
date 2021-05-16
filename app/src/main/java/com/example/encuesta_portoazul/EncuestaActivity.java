@@ -12,10 +12,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class Encuesta extends AppCompatActivity {
+public class EncuestaActivity extends AppCompatActivity {
 
     //campos de layout
     EditText nombre, apellido, telefono, direccion, profesion, cargo, id;
@@ -111,7 +110,7 @@ public class Encuesta extends AppCompatActivity {
                     paciente.setEstrato(estrato.getSelectedItem().toString());
                     paciente.setNivel_estudio(niveleducativo.getSelectedItem().toString());
 
-                    db = new AdminSQLiteOpenHelper(Encuesta.this);
+                    db = new AdminSQLiteOpenHelper(EncuestaActivity.this);
                     boolean p = db.addPaciente(paciente);
                     if (p){
                         //alerta("Se ha creado exitosamente el paciente");
@@ -172,14 +171,14 @@ public class Encuesta extends AppCompatActivity {
                 "\n" +
                 "Se encuentra de acuerdo con el tratamiento de sus datos. ";
 
-        AlertDialog.Builder alerta = new AlertDialog.Builder(Encuesta.this);
+        AlertDialog.Builder alerta = new AlertDialog.Builder(EncuestaActivity.this);
         alerta.setMessage(texto)
                 .setCancelable(false)
                 .setPositiveButton("Acepto", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //finish();
-                        Intent intent = new Intent(Encuesta.this, PrincipalActivity.class);
+                        Intent intent = new Intent(EncuestaActivity.this, PrincipalActivity.class);
                         intent.putExtra("EncuestaToPrincipal", "NoAcepto");
                         dialog.cancel();
                         //finish();
@@ -188,7 +187,7 @@ public class Encuesta extends AppCompatActivity {
                 .setNegativeButton("No acepto", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Encuesta.this, PrincipalActivity.class);
+                        Intent intent = new Intent(EncuestaActivity.this, PrincipalActivity.class);
                         intent.putExtra("EncuestaToPrincipal", "Acepto");
                         startActivity(intent);
                         finish();
