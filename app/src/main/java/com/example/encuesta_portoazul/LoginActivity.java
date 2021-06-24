@@ -20,7 +20,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText Login_EdT_User,Login_EdT_Password;
     Button Login_BT_Login;
@@ -54,11 +54,13 @@ public class login extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         //textView.setText("Response is: "+ response.substring(0,500));
-                        if (!response.isEmpty()){
+
+                        System.out.println("Respuesta de API"+ response);
+                        if (response.contains("{")  ){
                             Intent intent= new Intent(getApplicationContext(),PrincipalActivity.class);
                             startActivity(intent);
                         }else{
-                            Toast.makeText( login.this,"usuario o contraseñas o son incorrectas", Toast.LENGTH_SHORT).show();
+                            Toast.makeText( LoginActivity.this,"usuario o contraseñas o son incorrectas", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -66,7 +68,7 @@ public class login extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(login.this,error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,error.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

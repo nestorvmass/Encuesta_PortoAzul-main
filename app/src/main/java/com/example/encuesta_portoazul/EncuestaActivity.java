@@ -14,6 +14,17 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class EncuestaActivity extends AppCompatActivity {
 
     //campos de layout
@@ -109,9 +120,10 @@ public class EncuestaActivity extends AppCompatActivity {
                     paciente.setEstado_civil(estado_civil.getSelectedItem().toString());
                     paciente.setEstrato(estrato.getSelectedItem().toString());
                     paciente.setNivel_estudio(niveleducativo.getSelectedItem().toString());
-
+                    insertar_paciente();
                     db = new AdminSQLiteOpenHelper(EncuestaActivity.this);
                     boolean p = db.addPaciente(paciente);
+
                     if (p){
                         //alerta("Se ha creado exitosamente el paciente");
                         cuestionario = new Cuestionario();
@@ -121,13 +133,13 @@ public class EncuestaActivity extends AppCompatActivity {
                         cuestionario.setPregunta3(convertirRadioButtonToInt(respuesta3));
                         cuestionario.setPregunta4(String.valueOf(respuesta4.getText()));
                         cuestionario.setPregunta5(convertirRadioButtonToInt(respuesta5));
-
                         boolean c = db.addCuestionario(cuestionario);
+                        insertar_cuestionario();
                         if (c){
-                            alerta("Cuestionario guardo exitosamente");
+                            alerta("Cuestionario guardo exitosamente en db_local");
                             finish();
                         }else{
-                            alerta("Error al guar cuestionario");
+                            alerta("Error al guarda cuestionario en db_local");
 
                         }
                     }else {
@@ -211,5 +223,90 @@ public class EncuestaActivity extends AppCompatActivity {
 
     private int convertirRadioButtonToInt(RadioButton radioButton){
         return Integer.parseInt(String.valueOf(radioButton.getText()));
+    }
+
+
+
+    private void insertar_paciente(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://android-americana.000webhostapp.com/insertar_paciente.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equalsIgnoreCase("Paciente_insertado")){
+                            Toast.makeText(EncuestaActivity.this,"Paciente guardado en la nube", Toast.LENGTH_SHORT).show();
+                        }else{
+
+                            Toast.makeText(EncuestaActivity.this,response, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(EncuestaActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<String,String>();
+                parametros.put("id", paciente.getId());
+                parametros.put("nombre", paciente.getNombre());
+                parametros.put("apellido", paciente.getApellido());
+                parametros.put("telefono", paciente.getTelefono());
+                parametros.put("direccion", paciente.getDireccion());
+                parametros.put("estado_civil", paciente.getEstado_civil());
+                parametros.put("profesion", paciente.getProfesion());
+                parametros.put("estrato", paciente.getEstrato());
+                parametros.put("cargo", paciente.getCargo());
+                parametros.put("ultimo_neducativo", paciente.getNivel_estudio());
+                return parametros;
+            }
+        };
+
+        // Add the request to the RequestQueue.
+        RequestQueue queue= Volley.newRequestQueue(EncuestaActivity.this);
+        queue.add(stringRequest);
+
+    }
+
+
+    private void insertar_cuestionario(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://android-americana.000webhostapp.com/insertar_cuestionario.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equalsIgnoreCase("Cuestionario_Insertado")){
+                            Toast.makeText(EncuestaActivity.this,"Cuestionario guardado en la nube", Toast.LENGTH_SHORT).show();
+                        }else{
+
+                            Toast.makeText(EncuestaActivity.this,response, Toast.LENGTH_SHORT).show();
+                            System.out.println("Error al guardar el cuestionari: el error fue el siguiente: \n" + response);
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(EncuestaActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<String,String>();
+                parametros.put("id_paciente", cuestionario.getId_paciente());
+                parametros.put("pregunta1", String.valueOf(cuestionario.getPregunta1()));
+                parametros.put("pregunta2", String.valueOf(cuestionario.getPregunta2()));
+                parametros.put("pregunta3", String.valueOf(cuestionario.getPregunta3()));
+                parametros.put("pregunta4", String.valueOf(cuestionario.getPregunta4()));
+                parametros.put("pregunta5", String.valueOf(cuestionario.getPregunta5()));
+                parametros.put("promedio", String.valueOf(cuestionario.getPromedio()));
+                return parametros;
+            }
+        };
+
+        // Add the request to the RequestQueue.
+        RequestQueue queue= Volley.newRequestQueue(EncuestaActivity.this);
+        queue.add(stringRequest);
+
     }
 }
