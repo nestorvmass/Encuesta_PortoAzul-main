@@ -66,8 +66,9 @@ public class ResultadoEncuesta extends AppCompatActivity {
                         Gson gson = new Gson();
                         RecuperarInfoResponse m = gson.fromJson(response, RecuperarInfoResponse.class);
 
-                        Toast.makeText( ResultadoEncuesta.this,response, Toast.LENGTH_LONG).show();
+                        //Toast.makeText( ResultadoEncuesta.this,response, Toast.LENGTH_LONG).show();
 
+                        alerta("Informacion Cargada exitosamente");
 
                         persons.clear();
                         for(int i = 0; i < m.getPersona().size(); i++){
@@ -87,4 +88,8 @@ public class ResultadoEncuesta extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    private void alerta(String mensaje){
+        Toast.makeText(getApplicationContext(),
+                mensaje , Toast.LENGTH_SHORT).show();
+    }
 }

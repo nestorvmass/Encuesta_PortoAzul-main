@@ -23,7 +23,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     EditText Login_EdT_User,Login_EdT_Password;
-    Button Login_BT_Login;
+    Button Login_BT_Login, Login_BT_Register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         Login_EdT_User = findViewById(R.id.Login_EdT_User);
         Login_EdT_Password = findViewById(R.id.Login_EdT_Password);
         Login_BT_Login = findViewById(R.id.Login_BT_Login);
+        Login_BT_Register = findViewById(R.id.Login_BT_Register);
 
 
         Login_BT_Login.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +43,15 @@ public class LoginActivity extends AppCompatActivity {
                 validarUsuario("https://android-americana.000webhostapp.com/validar_usuario.php");
 
                 //validarUsuario("https://pmovil1cua.000webhostapp.com/validar_usuario.php");
+            }
+        });
+
+
+        Login_BT_Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 

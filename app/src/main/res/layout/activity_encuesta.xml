@@ -531,7 +531,7 @@
                         android:layout_weight="1"
                         android:checked="false"
 
-                        android:tag="NO"
+                        android:tag="si"
                         android:text="Si" />
 
                     <RadioButton
@@ -539,8 +539,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:tag="NO"
-                        android:text="NO" />
+                        android:tag="No"
+                        android:text="No" />
 
 
                 </RadioGroup>

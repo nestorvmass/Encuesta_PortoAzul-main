@@ -71,8 +71,9 @@ public class PrincipalActivity extends AppCompatActivity {
         opciones = new ArrayList<String>();
         opciones.add("Cuestionario de satisfacción");
         opciones.add("Resultado de cuestionario pacientes");
+        opciones.add("Pagina Web de la clinica");
+        opciones.add("Ubicacion de la Clinica");
         opciones.add("Sobre esta app");
-        opciones.add("Medidor de Estres Laboral");
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, opciones );
         menu.setAdapter(adaptador);
         menu.setOnItemClickListener((parent, view, position, id) -> {
@@ -94,17 +95,25 @@ public class PrincipalActivity extends AppCompatActivity {
                 i.putExtras(bundle);
                 startActivity(i);
             }
+
+            //Pagina
             if(position==2){
+                Intent i = new Intent(this, Pagina.class);
+                startActivity(i);
+
+            }
+            //mapa
+            if(position==3){
+                Intent i = new Intent(this, Mapas.class);
+
+                startActivity(i);
+
+            }
+            if(position==4){
                 Intent i = new Intent(this, InfoDevsActivity.class);
                 Bundle bundle = new Bundle();
                 i.putExtras(bundle);
                 startActivity(i);
-            }
-            if(position==3){
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("com.example.medidordeestreslaboral","com.example.medidordeestreslaboral.MainActivity"));
-                startActivity(intent);
-
             }
 
             /*

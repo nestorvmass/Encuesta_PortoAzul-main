@@ -112,10 +112,27 @@
 
                 </Button>
 
+
             </LinearLayout>
 
         </LinearLayout>
 
 
     </FrameLayout>
+
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="Quiero registrarme"
+        android:textColor="@color/white"
+        android:id="@+id/Login_BT_Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
